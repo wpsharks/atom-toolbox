@@ -1,4 +1,4 @@
-# Atom Toolbox <https://atom.io/packages/ws-toolbox>
+# Atom Toolbox (for WebSharks™)
 
 ## Installation Instructions
 
@@ -8,15 +8,15 @@
   $ apm install ws-toolbox
   ```
 
-- Configure paths. See package Settings page.
+- Configure; i.e., explore Settings page in Atom (screenshot below).
 
 ---
 
 ## Key Bindings
 
-See **Atom → Main Menu Bar → Packages → WebSharks Toolbox**
+See: **Atom → Main Menu Bar → Packages → WebSharks Toolbox**
 
-This will show you the available commands their keyboard shortcuts.
+_This will show you the available commands their keyboard shortcuts._
 
 ---
 
