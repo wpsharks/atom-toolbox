@@ -10,7 +10,7 @@
 
 - Configure; i.e., explore Settings page in Atom; (screenshot below).
 
-![](assets/settings.png)
+![](https://raw.githubusercontent.com/websharks/atom-toolbox/master/assets/settings.png)
 
 
 ## Key Bindings
