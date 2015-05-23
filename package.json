@@ -1,24 +1,27 @@
 {
-  "version": "15.5.23",
+  "version": "15.6.0",
   "name": "ws-toolbox",
   "description": "Atom toolbox for WebSharks.",
   "repository": "https://github.com/websharks/atom-toolbox",
   "license": "GPL-3.0+",
-
   "engines": {
     "atom": ">=0.201.0"
   },
   "dependencies": {
     "atom-space-pen-views": ">=2.0.5",
-
     "cson": ">=3.0.1",
     "escape-html": ">=1.0.1",
     "prettydiff": ">=1.11.10",
     "js-beautify": ">=1.5.5"
   },
-
   "main": "lib/package",
-  "styles": ["style.less"],
-  "keymaps": ["keymap.cson"],
-  "menus": ["menu.cson"]
+  "styles": [
+    "style.less"
+  ],
+  "keymaps": [
+    "keymap.cson"
+  ],
+  "menus": [
+    "menu.cson"
+  ]
 }
