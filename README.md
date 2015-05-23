@@ -17,4 +17,4 @@
 
 To learn keyboard shortcuts, please see:  
 **Atom → Main Menu Bar → Packages → WebSharks Toolbox**  
-_This will show you the available commands their keyboard shortcuts._
+_This will show you the available commands & their keyboard shortcuts._
