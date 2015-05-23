@@ -1,0 +1,14 @@
+{
+  "css": {
+    "insize": 2,
+    "inchar": " ",
+    "inlevel": 0,
+    "force_indent": false,
+    "vertical": false,
+    "objsort": "none",
+    "preserve": "all",
+    "quoteConvert": "single",
+    "topcoms": false,
+    "diffcoms": true
+  }
+}

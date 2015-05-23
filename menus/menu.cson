@@ -1,0 +1,28 @@
+'context-menu':
+  'atom-text-editor': []
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'WebSharks Toolbox'
+      'submenu': [
+        {
+          'label': 'Generate CTags'
+          'command': 'ws-toolbox:ctags'
+        },
+        {
+          'label': 'Generate CTags (Force WS Style Guidelines)'
+          'command': 'ws-toolbox:ctags-ws'
+        },
+        {
+          'label': 'Format'
+          'command': 'ws-toolbox:format'
+        },
+        {
+          'label': 'Format (Force WS Style Guidelines)'
+          'command': 'ws-toolbox:format-ws'
+        }
+      ]
+    ]
+  }
+]

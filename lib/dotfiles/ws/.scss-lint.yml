@@ -1,0 +1,10 @@
+linters:
+  NestingDepth:
+    max_depth: 6
+  SelectorDepth:
+    max_depth: 6
+  PropertyCount:
+    max_properties: 50
+    include_nested: false
+  EmptyLineBetweenBlocks:
+    enabled: false
