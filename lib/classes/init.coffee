@@ -19,6 +19,6 @@ module.exports = class Init
 
       [_name, _value] = _line.split('=', 2)
 
-      if /^declare\s+\-x\s+PATH$/.test(_name)
+      if /^(?:declare\s+\-x\s+)?PATH$/.test(_name)
         process.env.PATH = _value.replace(/^[\s"]+|[\s"]+$/g, '')
         break; # All done here.

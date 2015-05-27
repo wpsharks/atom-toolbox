@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Current directory.
-__dirname="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")";
+__dirname="$(dirname "${BASH_SOURCE[0]}")";
 
 # Create symlinks in home directory.
 for dotfile in "$__dirname"/.*; do
