@@ -31,8 +31,8 @@ module.exports = class Ctagger
     if !ctags # Use default ctags in $PATH?
       ctags = 'ctags' # Default binary.
 
-    homeConfigFile = process.env.HOME+'/.ctags'
-    wsConfigFile = Path.join(__dirname, '../dotfiles/ws/.ctags')
+    homeConfigFile = process.env.HOME+'/.ctags.cnf'
+    wsConfigFile = Path.join(__dirname, '../dotfiles/ws/.ctags.cnf')
 
     configFile = wsConfigFile # Default config. file.
     if !@wsStyleGuidelines and Fs.existsSync(homeConfigFile)
