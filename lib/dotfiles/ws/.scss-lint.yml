@@ -1,10 +1,15 @@
 linters:
   NestingDepth:
-    max_depth: 6
+    enabled: false
   SelectorDepth:
-    max_depth: 6
+    enabled: false
   PropertyCount:
-    max_properties: 50
-    include_nested: false
+    enabled: false
+  LeadingZero:
+    enabled: false
   EmptyLineBetweenBlocks:
+    enabled: false
+  PropertySortOrder:
+    enabled: false
+  ImportantRule:
     enabled: false
