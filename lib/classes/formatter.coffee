@@ -47,17 +47,17 @@ module.exports = class Formatter
         @textEditor.save()
         @modalStatus.destroy()
 
-      when 'css'
-        @textEditor.setText (@formatCss())
-        @textEditor.save()
-        @modalStatus.destroy()
+      #when 'css'
+      #  @textEditor.setText (@formatCss())
+      #  @textEditor.save()
+      #  @modalStatus.destroy()
 
       when 'json', 'javascript'
         @textEditor.setText (@formatJavaScript())
         @textEditor.save()
         @modalStatus.destroy()
 
-      when 'scss', 'sass', 'less'
+      when 'css', 'scss', 'sass', 'less'
         @textEditor.setText (@formatSassLess())
         @textEditor.save()
         @modalStatus.destroy()

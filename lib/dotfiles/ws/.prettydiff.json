@@ -4,7 +4,7 @@
     "inchar": " ",
     "inlevel": 0,
     "force_indent": false,
-    "vertical": false,
+    "vertical": true,
     "objsort": "none",
     "preserve": "all",
     "quoteConvert": "single",
