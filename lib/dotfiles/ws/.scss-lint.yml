@@ -1,4 +1,8 @@
 linters:
+  Comment:
+    allowed: ^[/*]
+  IdSelector:
+    enabled: false
   NestingDepth:
     enabled: false
   SelectorDepth:

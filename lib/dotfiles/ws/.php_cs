@@ -3,6 +3,7 @@ return Symfony\CS\Config\Config::create()
     ->level(Symfony\CS\FixerInterface::SYMFONY_LEVEL)
     ->fixers([
         '-return',
+        '-empty_return',
         '-standardize_not_equal',
         '-blankline_after_open_tag',
         '-single_blank_line_before_namespace',
