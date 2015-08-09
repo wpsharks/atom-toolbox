@@ -4,10 +4,14 @@
     "inchar": " ",
     "inlevel": 0,
     "force_indent": false,
+
     "vertical": true,
     "objsort": "none",
+
     "preserve": "all",
+
     "quoteConvert": "single",
+
     "topcoms": false,
     "diffcoms": true
   }
