@@ -15,6 +15,9 @@ linters:
     enabled: false
   PropertySortOrder:
     enabled: false
+  QualifyingElement:
+    allow_element_with_class: true
+    allow_element_with_attribute: true
   SelectorDepth:
     enabled: false
   SpaceAfterPropertyColon:
