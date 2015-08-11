@@ -11,9 +11,11 @@
     "atom-space-pen-views": ">=2.0.5",
     "font-awesome": ">=4.3.0",
     "cson": ">=3.0.1",
+    "temp": ">=0.8.3",
+    "fs-extra": ">=0.23.1",
     "escape-html": ">=1.0.1",
-    "prettydiff": ">=1.11.10",
-    "js-beautify": ">=1.5.5"
+    "prettydiff": ">=1.12.19",
+    "js-beautify": ">=1.5.10"
   },
   "main": "lib/package",
   "styles": [

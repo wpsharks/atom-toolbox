@@ -11,15 +11,29 @@ module.exports = # Static class members.
 
     ctagsPath:
       title: 'cTags Path'
-      description: '`brew tap websharks-formulas`, followed by `brew install websharks-ctags`.' +
-                    ' Then enter `ctags` here. Or, you can enter `/usr/local/bin/ctags`.'
+      description: '`$ brew tap websharks-formulas && brew install websharks-ctags`.' +
+                    ' Then enter `ctags` here. Or `/usr/local/bin/ctags`.'
       type: 'string'
       default: ''
 
     phpCsFixerPath:
       title: 'PHP CS Fixer Path'
-      description: '`brew install php-cs-fixer`, followed by `php-cs-fixer self-update`.' +
-                    ' Then enter `php-cs-fixer` here. Or, you can enter `/usr/local/bin/php-cs-fixer`.'
+      description: '`$ brew install php-cs-fixer && php-cs-fixer self-update`.' +
+                    ' Then enter `php-cs-fixer` here. Or `/usr/local/bin/php-cs-fixer`.'
+      type: 'string'
+      default: ''
+
+    sassConvertPath:
+      title: 'Sass-Convert Path'
+      description: '`$ brew install ruby && gem install sass`.' +
+                    ' Then enter `sass-convert` here. Or `/usr/local/bin/sass-convert`.'
+      type: 'string'
+      default: ''
+
+    sassAlignPath:
+      title: 'Sass-Align Path'
+      description: '`$ brew install ruby && gem install sass-align`.' +
+                    ' Then enter `sass-align` here. Or `/usr/local/bin/sass-align`.'
       type: 'string'
       default: ''
 

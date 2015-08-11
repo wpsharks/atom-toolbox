@@ -4,18 +4,18 @@ Command = require('./command')
 
 module.exports = class Init
 
-  constructor: ->
+  constructor: -> # Constructor.
 
-    @syncPath()
+    @syncPath() # Sync on instantiation.
 
-  syncPath: ->
+  syncPath: -> # Sync $PATH w/ current user's $PATH.
 
     shellExport = Command.runSync(process.env.SHELL + ' -lc export')
 
     for _line in shellExport.trim().split('\n')
 
       if _line.indexOf('=') is -1
-        continue # Not applicable.
+        continue # Skip line.
 
       [_name, _value] = _line.split('=', 2)
 

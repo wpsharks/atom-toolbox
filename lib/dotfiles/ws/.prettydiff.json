@@ -3,16 +3,21 @@
     "insize": 2,
     "inchar": " ",
     "inlevel": 0,
+    "comments": "indent",
     "force_indent": false,
 
-    "vertical": true,
+    "vertical": "all",
     "objsort": "none",
 
     "preserve": "all",
-
-    "quoteConvert": "single",
+    "cssinsertlines": false,
 
     "topcoms": false,
-    "diffcoms": true
+    "diffcoms": true,
+
+    "alignProperties": true,
+    "quoteConvert": "single",
+    "noEmptyLines": false,
+    "tightenAtRules": true
   }
 }

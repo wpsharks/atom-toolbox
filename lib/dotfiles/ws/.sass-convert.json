@@ -1,0 +1,11 @@
+{
+  "indentSize": 2,
+  "dasherize": false,
+  "unixNewlines": true,
+  "defaultEncoding": "UTF-8",
+
+  "alignProperties": true,
+  "quoteConvert": "single",
+  "noEmptyLines": false,
+  "tightenAtRules": true
+}

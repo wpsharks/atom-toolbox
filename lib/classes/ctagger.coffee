@@ -1,7 +1,7 @@
 'use strict'
 
-Fs = require('fs')
 Path = require('path')
+Fs = require('fs-extra')
 {$} = require('atom-space-pen-views')
 Command = require('./command')
 
@@ -18,14 +18,16 @@ module.exports = class Ctagger
     @textEditor = @workspace?.getActiveTextEditor()
     @textEditorPath = @textEditor?.getPath()
 
-    if !@project or !@workspace or !@textEditor or !@textEditorPath
-      return # Not possible in this case.
+    if !@project or !@workspace
+      return # Not possible.
 
-    @status = $('<div class="ws-toolbox-com-status"></div>')
-    loading = '<i class="fa fa-tags fa-2x"></i>'
-    loading += '<i class="fa fa-cog fa-2x fa-spin"></i>'
-    loading += ' ... Generating CTags '
-    @status.html(loading)
+    if !@textEditor or !@textEditorPath
+      return # Not possible.
+
+    @status = $('<div class="ws-toolbox -status"></div>')
+    loading = '<i class="-fa -fa-tags -fa-2x"></i><i class="-fa -fa-cog -fa-2x -fa-spin"></i>'
+    loading += ' ... Generating CTags ' # Nothing more to say here.
+    @status.html(loading) # Display status.
 
     ctags = atom.config.get('ws-toolbox.ctagsPath')
     if !ctags # Use default ctags in $PATH?
@@ -40,7 +42,7 @@ module.exports = class Ctagger
 
     ctags += " --options='"+configFile+"'"
 
-    console.log(ctags) # For debugging.
+    console.log('Generating CTags: `%s`', ctags) # For debugging.
 
     @project.getPaths().forEach (projectPath) =>
       if @textEditorPath.indexOf(projectPath + '/') is 0

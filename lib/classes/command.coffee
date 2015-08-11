@@ -7,11 +7,11 @@ module.exports = # Static class members.
   run: (command, callback, options) ->
 
     if command # Callback is optional here.
-      ChildProcess.exec command, options, (error, stdout, stderr) ->
+      ChildProcess.exec command, options or {}, (error, stdout, stderr) ->
         callback error, stdout, stderr if typeof callback is 'function'
 
-  runSync: (command, options) ->
+  runSync: (command, options) -> # Synchronous.
 
-    if command # No callback here whatsoever.
-      ChildProcess.execSync(command, options).toString()
+    if command # Synchronous; no callback here whatsoever.
+      ChildProcess.execSync(command, options or {}).toString()
     else '' # Empty string in this case.

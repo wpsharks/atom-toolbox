@@ -1,12 +1,66 @@
-@import '../node_modules/font-awesome/less/font-awesome.less';
+@font-face {
+  font-family: 'ws-toolbox-font-awesome'; // Unique filename.
+  src        : url('atom://ws-toolbox/node_modules/font-awesome/fonts/fontawesome-webfont.woff') format('woff');
+}
+.ws-toolbox {
 
-.ws-toolbox-com-status {
-  font-size: 250%;
-  & > .fa-cog {
-    vertical-align: middle;
+  // Status.
+  &.-status {
+    opacity  : 0.25;
+    font-size: 300%;
+
+    > .-fa-github,
+    > .-fa-tags {
+      float: right;
+    }
+    > .-fa-cog {
+      vertical-align: middle;
+    }
   }
-  & > .fa-github,
-  & > .fa-tags {
-    float: right;
+
+  // Font Awesome.
+  .-fa {
+    font                  : normal normal normal 14px/1 ws-toolbox-font-awesome;
+    font-size             : inherit; // Change `0` from above.
+    display               : inline-block;
+    -webkit-font-smoothing: antialiased;
+  }
+  .-fa-cog::before {
+    content: '\f013';
+  }
+  .-fa-github::before {
+    content: '\f09b';
+  }
+  .-fa-tags::before {
+    content: '\f02c';
+  }
+  .-fa-2x {
+    font-size: 2em;
+  }
+  .-fa-3x {
+    font-size: 3em;
+  }
+  .-fa-4x {
+    font-size: 4em;
+  }
+  .-fa-5x {
+    font-size: 5em;
+  }
+  .-fa-fw {
+    width     : 1.28571429em;
+    text-align: center;
+  }
+  .-fa-spin {
+    -webkit-animation: ws-toolbox-fa-spin 1s infinite linear;
+  }
+}
+
+// Animations.
+@-webkit-keyframes ws-toolbox-fa-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
   }
 }
