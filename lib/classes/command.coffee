@@ -12,6 +12,13 @@ module.exports = # Static class members.
 
   runSync: (command, options) -> # Synchronous.
 
+    response = '' # Initialize response.
+
     if command # Synchronous; no callback here whatsoever.
-      ChildProcess.execSync(command, options or {}).toString()
-    else '' # Empty string in this case.
+      try # In case of parse error or any other unexpectec behavior.
+        response = ChildProcess.execSync(command, options or {}).toString()
+      catch error # Catch, log, and then rethrow.
+        console.log(error)
+        throw error
+
+    response # Return the response.

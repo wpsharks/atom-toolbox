@@ -62,53 +62,68 @@ module.exports = class Formatter
     # Memory checkpoint and formatting.
 
     @checkpoint = @textEditor.createCheckpoint()
-    @format() # Format the temp file; based on grammar.
-    @textEditor.setText(Fs.readFileSync(@tempEditorPath).toString())
 
-    # Memory restoration and text editor update.
+    @format( => # Format; based on grammar.
 
-    @textEditor.save() # Save updated file contents.
-    @curscrop.restoreFromMemory() # Cursors & scrollTop.
-    @textEditor.groupChangesSinceCheckpoint(@checkpoint)
-    Temp.cleanupSync() # Just to be extra sure.
+      formattedText = @getTempFileContents() # Formatted now.
+      if formattedText # In case of unexptected failure.
+        @textEditor.setText(formattedText)
 
-    # All done. Hide modal status.
+      # Memory restoration and text editor update.
 
-    @modalStatus.destroy() # All done now.
+      @textEditor.save() # Save updated file contents.
+      @curscrop.restoreFromMemory() # Cursors & scrollTop.
+      @textEditor.groupChangesSinceCheckpoint(@checkpoint)
+
+      # All done. Hide modal status.
+
+      @modalStatus.destroy() # All done now.
+    )
+  # --------------------------------------------------------------------------------------------------------------------
+  # Misc. utilities.
+  # --------------------------------------------------------------------------------------------------------------------
+
+  getTempFileContents: -> # Temporary file.
+
+    Fs.readFileSync(@tempEditorPath).toString()
+
+  writeTempFileContents: (contents) ->
+
+    Fs.writeFileSync(@tempEditorPath, contents)
 
   # --------------------------------------------------------------------------------------------------------------------
   # Format handler. Choose the right formatter; based on grammar.
   # --------------------------------------------------------------------------------------------------------------------
 
-  format: -> # Based on language/grammar.
+  format: (callback) -> # Based on language/grammar.
 
     switch @textEditorGrammarNameLower
 
       when 'php' # Primay focus.
-        @formatPhp_viaPhpCsFixer()
+        @formatPhp_viaPhpCsFixer(callback)
 
       when 'html', 'xml'
-        @formatHtml_viaJsBeautify()
+        @formatHtml_viaJsBeautify(callback)
 
       when 'json', 'javascript'
-        @formatJs_viaJsBeautify()
+        @formatJs_viaJsBeautify(callback)
 
       when 'css', 'scss', 'sass' # A user can choose prettyDiff w/ this undocumented option.
         if !@wsStyleGuidelines and String(atom.config.get('ws-toolbox.cssSassLessFormatter')).toLowerCase() is 'prettydiff'
-          @formatCssSassLess_viaPrettyDiff() # This might be preferred by some.
-        else @formatCssSass_viaSassConvert() # Best available option.
+          @formatCssSassLess_viaPrettyDiff(callback) # This might be preferred by some.
+        else @formatCssSass_viaSassConvert(callback) # Best available option.
 
       when 'less' # Use PrettyDiff for LESS syntax.
-        @formatCssSassLess_viaPrettyDiff() # @TODO improve.
+        @formatCssSassLess_viaPrettyDiff(callback) # @TODO improve.
 
       when 'coffeescript'
-        @formatCoffeeScript_viaNothing()
+        @formatCoffeeScript_viaNothing(callback)
 
   # --------------------------------------------------------------------------------------------------------------------
   # A few different types of code beautifiers/formatters.
   # --------------------------------------------------------------------------------------------------------------------
 
-  formatPhp_viaPhpCsFixer: ->
+  formatPhp_viaPhpCsFixer: (callback) ->
 
     phpCsFixer = atom.config.get('ws-toolbox.phpCsFixerPath')
     if !phpCsFixer # Use default php-cs-fixer in $PATH?
@@ -126,11 +141,11 @@ module.exports = class Formatter
 
     console.log('formatPhp_viaPhpCsFixer: `%s`', phpCsFixer)
 
-    Command.runSync(phpCsFixer)
+    Command.run(phpCsFixer, callback) # Finall callback.
 
   # --------------------------------------------------------------------------------------------------------------------
 
-  formatHtml_viaJsBeautify: ->
+  formatHtml_viaJsBeautify: (callback) ->
 
     JsBeautify = require('js-beautify')
 
@@ -145,13 +160,12 @@ module.exports = class Formatter
 
     console.log('formatHtml_viaJsBeautify: %o', config)
 
-    formattedText = Fs.readFileSync(@tempEditorPath).toString()
-    formattedText = JsBeautify.html(formattedText, config)
-    Fs.writeFileSync(@tempEditorPath, formattedText)
+    @writeTempFileContents(JsBeautify.html(@getTempFileContents(), config))
+    callback() # Final callback on completion.
 
   # --------------------------------------------------------------------------------------------------------------------
 
-  formatJs_viaJsBeautify: ->
+  formatJs_viaJsBeautify: (callback) ->
 
     JsBeautify = require('js-beautify')
 
@@ -166,13 +180,12 @@ module.exports = class Formatter
 
     console.log('formatJs_viaJsBeautify: %o', config)
 
-    formattedText = Fs.readFileSync(@tempEditorPath).toString()
-    formattedText = JsBeautify.js(formattedText, config)
-    Fs.writeFileSync(@tempEditorPath, formattedText)
+    @writeTempFileContents(JsBeautify.js(@getTempFileContents(), config))
+    callback() # Final callback on completion.
 
   # --------------------------------------------------------------------------------------------------------------------
 
-  formatCss_viaJsBeautify: ->
+  formatCss_viaJsBeautify: (callback) ->
 
     JsBeautify = require('js-beautify')
 
@@ -187,13 +200,12 @@ module.exports = class Formatter
 
     console.log('formatCss_viaJsBeautify: %o', config)
 
-    formattedText = Fs.readFileSync(@tempEditorPath).toString()
-    formattedText = JsBeautify.css(formattedText, config)
-    Fs.writeFileSync(@tempEditorPath, formattedText)
+    @writeTempFileContents(JsBeautify.css(@getTempFileContents(), config))
+    callback() # Final callback on completion.
 
   # --------------------------------------------------------------------------------------------------------------------
 
-  formatCssSass_viaSassConvert: ->
+  formatCssSass_viaSassConvert: (callback) ->
 
     sassConvert = atom.config.get('ws-toolbox.sassConvertPath')
     if !sassConvert # Use default sass-convert in $PATH?
@@ -223,12 +235,12 @@ module.exports = class Formatter
 
     console.log('formatCssSassLess_viaSassConvert: `%s` %o', sassConvert, config)
 
-    Command.runSync(sassConvert)
-    @_formatCssSassLess_viaCustomSpecials(config)
-
+    Command.run(sassConvert, => # Callback handler.
+      @_formatCssSassLess_viaCustomSpecials(config, callback)
+    )
   # --------------------------------------------------------------------------------------------------------------------
 
-  formatCssSassLess_viaPrettyDiff: ->
+  formatCssSassLess_viaPrettyDiff: (callback) ->
 
     PrettyDiff = require('prettydiff')
 
@@ -241,20 +253,38 @@ module.exports = class Formatter
       $.extend(config, JSON.parse(Fs.readFileSync(homeConfigFile).toString()))
     config = config.css if typeof config.css is 'object'
 
-    prettyDiffConfig = $.extend({}, config)
-    prettyDiffConfig.source = Fs.readFileSync(@tempEditorPath).toString()
-    prettyDiffConfig.lang = 'css' # Covers CSS/SASS/SCSS/LESS.
-    prettyDiffConfig.mode = 'beautify' # Beautifying.
+    pdConfig = $.extend({}, config)
+    pdConfig.source = @getTempFileContents()
+    pdConfig.lang = 'css' # Covers all abstractions.
+    pdConfig.mode = 'beautify' # Beautifying.
 
     console.log('formatCssSassLess_viaPrettyDiff: %o', config)
 
-    formattedText = PrettyDiff.api(prettyDiffConfig)[0]
-    Fs.writeFileSync(@tempEditorPath, formattedText)
-    @_formatCssSassLess_viaCustomSpecials(config)
+    @writeTempFileContents(PrettyDiff.api(pdConfig)[0])
+    @_formatCssSassLess_viaCustomSpecials(config, callback)
 
   # --------------------------------------------------------------------------------------------------------------------
 
-  _formatCssSassLess_viaCustomSpecials: (config) ->
+  _formatCssSassLess_viaCustomSpecials: (config, callback) ->
+
+    callbackWrapper = => # Callback wrapper.
+
+      formattedText = @getTempFileContents()
+
+      if config.quoteConvert is 'single'
+        formattedText = formattedText.replace(/"/g, "'")
+
+      else if config.quoteConvert is 'double'
+        formattedText = formattedText.replace(/'/g, '"')
+
+      if config.noEmptyLines # No empty lines?
+        formattedText = formattedText.replace(/\n+/g, '\n')
+
+      else if config.tightenAtRules is true # Tighten @ rules?
+        formattedText = formattedText.replace(/^([ \t]*@.+?;)\n{2,}(?=[ \t]*@)/gm, '$1\n')
+
+      @writeTempFileContents(formattedText)
+      callback() # Final callback on completion.
 
     sassAlign = atom.config.get('ws-toolbox.sassAlignPath')
     if !sassAlign # Use default sass-align in $PATH?
@@ -264,26 +294,13 @@ module.exports = class Formatter
 
     if config.alignProperties is true
       console.log('&& `%s`', sassAlign)
-      Command.runSync(sassAlign)
-
-    formattedText = Fs.readFileSync(@tempEditorPath).toString()
-
-    if config.quoteConvert is 'single'
-      formattedText = formattedText.replace(/"/g, "'")
-
-    else if config.quoteConvert is 'double'
-      formattedText = formattedText.replace(/'/g, '"')
-
-    if config.noEmptyLines # No empty lines?
-      formattedText = formattedText.replace(/\n+/g, '\n')
-
-    else if config.tightenAtRules is true # Tighten @ rules?
-      formattedText = formattedText.replace(/^([ \t]*@.+?;)\n{2,}(?=[ \t]*@)/gm, '$1\n')
-
-    Fs.writeFileSync(@tempEditorPath, formattedText)
+      Command.run(sassAlign, callbackWrapper)
+    else callbackWrapper() # Run wrapper only.
 
   # --------------------------------------------------------------------------------------------------------------------
 
-  formatCoffeeScript_viaNothing: -> # @TODO Find a decent formatter.
+  formatCoffeeScript_viaNothing: (callback) -> # @TODO Find a decent formatter.
 
     console.log('formatCoffeeScript_viaNothing: `%s`', '')
+
+    callback() # Final callback on completion.
