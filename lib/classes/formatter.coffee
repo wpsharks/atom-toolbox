@@ -56,7 +56,7 @@ module.exports = class Formatter
     # Save editor and create a temp file.
 
     @textEditor.save() # Save file contents.
-    @tempEditorPath = Temp.path({suffix: Path.extname(@textEditorPath)})
+    @tempEditorPath = Temp.mkdirSync()+'/'+Path.basename(@textEditorPath)
     Fs.copySync(@textEditorPath, @tempEditorPath) # Temp file.
 
     # Memory checkpoint and formatting.
@@ -118,6 +118,8 @@ module.exports = class Formatter
 
       when 'coffeescript'
         @formatCoffeeScript_viaNothing(callback)
+
+      else callback()
 
   # --------------------------------------------------------------------------------------------------------------------
   # A few different types of code beautifiers/formatters.

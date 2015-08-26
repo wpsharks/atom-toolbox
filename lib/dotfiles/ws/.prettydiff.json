@@ -15,7 +15,7 @@
     "topcoms": false,
     "diffcoms": true,
 
-    "alignProperties": true,
+    "alignProperties": false,
     "quoteConvert": "single",
     "noEmptyLines": false,
     "tightenAtRules": true
