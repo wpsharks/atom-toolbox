@@ -15,10 +15,12 @@ module.exports = class Ctagger
 
     @project = atom.project
     @workspace = atom.workspace
+    @pane = @workspace?.getActivePane()
+
     @textEditor = @workspace?.getActiveTextEditor()
     @textEditorPath = @textEditor?.getPath()
 
-    if !@project or !@workspace
+    if !@project or !@workspace or !@pane
       return # Not possible.
 
     if !@textEditor or !@textEditorPath

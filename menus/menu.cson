@@ -21,6 +21,10 @@
         {
           'label': 'Format (Force WS Style Guidelines)'
           'command': 'ws-toolbox:format-ws'
+        },
+        {
+          'label': 'Qursors'
+          'command': 'ws-toolbox:qursors'
         }
       ]
     ]

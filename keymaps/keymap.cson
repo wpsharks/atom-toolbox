@@ -5,3 +5,5 @@
 
   'ctrl-cmd-f': 'ws-toolbox:format'
   'ctrl-alt-cmd-f': 'ws-toolbox:format-ws'
+
+  'ctrl-cmd-q': 'ws-toolbox:qursors'

@@ -3,6 +3,7 @@
 Init = require('./classes/init')
 Ctagger = require('./classes/ctagger')
 Formatter = require('./classes/formatter')
+Qursors = require('./classes/qursors')
 {CompositeDisposable} = require('atom')
 
 module.exports = # Static class members.
@@ -61,6 +62,8 @@ module.exports = # Static class members.
     @subscriptions.add @commands.add 'atom-text-editor', 'ws-toolbox:format': => @comFormat()
     @subscriptions.add @commands.add 'atom-text-editor', 'ws-toolbox:format-ws': => @comFormat(true)
 
+    @subscriptions.add @commands.add 'atom-text-editor', 'ws-toolbox:qursors': => @comQursors()
+
   comCtags: (wsStyleGuidelines) -> # CTags generator; against current project directory.
 
     new Ctagger(wsStyleGuidelines)
@@ -68,6 +71,10 @@ module.exports = # Static class members.
   comFormat: (wsStyleGuidelines) -> # Code formatter/beautifier.
 
     new Formatter(wsStyleGuidelines)
+
+  comQursors: () -> # Quick cursors.
+
+    new Qursors()
 
   deactivate: -> # Teardown.
 

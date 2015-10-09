@@ -22,8 +22,9 @@ module.exports = class Formatter
 
     @project = atom.project
     @workspace = atom.workspace
+    @pane = @workspace?.getActivePane()
 
-    if !@project or !@workspace
+    if !@project or !@workspace or !@pane
       return # Not possible.
 
     @textEditor = @workspace.getActiveTextEditor()
