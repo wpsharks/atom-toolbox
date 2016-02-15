@@ -3,6 +3,7 @@
     <description>PSR-2, but without line length check.</description>
     <rule ref="PSR2">
       <exclude name="Generic.Files.LineLength" />
+      <exclude name="PSR2.Files.ClosingTag.NotAllowed" />
       <exclude name="PSR2.ControlStructures.SwitchDeclaration.BodyOnNextLineCASE" />
       <exclude name="PSR2.ControlStructures.SwitchDeclaration.SpaceBeforeColonCASE" />
       <exclude name="PSR2.ControlStructures.SwitchDeclaration.SpaceBeforeColonDEFAULT" />
