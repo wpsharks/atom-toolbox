@@ -15,7 +15,7 @@
     "fs-extra": ">=0.23.1",
     "escape-html": ">=1.0.1",
     "prettydiff": ">=1.12.19",
-    "js-beautify": ">=1.5.10"
+    "js-beautify": ">=1.6.3"
   },
   "main": "lib/package",
   "styles": [

@@ -19,7 +19,7 @@ return Symfony\CS\Config\Config::create()
          'phpdoc_order',
          'phpdoc_var_to_type',
 
-         'short_array_syntax',
+         //'short_array_syntax',
 
          'strict',
          'strict_param',
