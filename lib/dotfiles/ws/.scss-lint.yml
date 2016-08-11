@@ -11,6 +11,8 @@ linters:
     enabled: false
   NestingDepth:
     enabled: false
+  DeclarationOrder:
+    enabled: false
   PropertyCount:
     enabled: false
   PropertySortOrder:
