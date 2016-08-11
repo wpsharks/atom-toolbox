@@ -11,6 +11,8 @@ linters:
     enabled: false
   NestingDepth:
     enabled: false
+  DeclarationOrder:
+    enabled: false
   PropertyCount:
     enabled: false
   PropertySortOrder:
@@ -19,6 +21,8 @@ linters:
     allow_element_with_class: true
     allow_element_with_attribute: true
   SelectorDepth:
+    enabled: false
+  SelectorFormat:
     enabled: false
   SpaceAfterPropertyColon:
     enabled: false

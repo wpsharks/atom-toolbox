@@ -1,6 +1,5 @@
 'use strict'
 
-Init = require('./classes/init')
 Ctagger = require('./classes/ctagger')
 Formatter = require('./classes/formatter')
 Qursors = require('./classes/qursors')
@@ -12,14 +11,14 @@ module.exports = # Static class members.
 
     ctagsPath:
       title: 'cTags Path'
-      description: '`$ brew tap websharks-formulas && brew install websharks-ctags`.' +
+      description: '`$ brew tap websharks/formulas && brew install websharks-ctags`.' +
                     ' Then enter `ctags` here. Or `/usr/local/bin/ctags`.'
       type: 'string'
       default: ''
 
     phpCsFixerPath:
       title: 'PHP CS Fixer Path'
-      description: '`$ brew install php-cs-fixer && php-cs-fixer self-update`.' +
+      description: '`$ brew install php-cs-fixer`.' +
                     ' Then enter `php-cs-fixer` here. Or `/usr/local/bin/php-cs-fixer`.'
       type: 'string'
       default: ''
@@ -50,8 +49,6 @@ module.exports = # Static class members.
       default: true
 
   activate: (state) ->
-
-    new Init # Initialize.
 
     @commands = atom.commands
     @subscriptions = new CompositeDisposable
