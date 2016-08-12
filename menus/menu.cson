@@ -7,14 +7,6 @@
       'label': 'WebSharks Toolbox'
       'submenu': [
         {
-          'label': 'Generate CTags'
-          'command': 'ws-toolbox:ctags'
-        },
-        {
-          'label': 'Generate CTags (Force WS Style Guidelines)'
-          'command': 'ws-toolbox:ctags-ws'
-        },
-        {
           'label': 'Format'
           'command': 'ws-toolbox:format'
         },

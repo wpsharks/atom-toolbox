@@ -5,6 +5,7 @@ Fs = require('fs-extra')
 Temp = require('temp').track()
 EscHtml = require('escape-html')
 {$} = require('atom-space-pen-views')
+
 Command = require('./command')
 Curscrop = require('./curscrop')
 

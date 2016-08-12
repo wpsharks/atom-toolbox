@@ -2,8 +2,8 @@
 
 Path = require('path')
 Fs = require('fs-extra')
-{$, TextEditorView} = require('atom-space-pen-views')
-{CompositeDisposable, TextEditor, TextBuffer} = require('atom')
+{CompositeDisposable} = require('atom')
+{$} = require('atom-space-pen-views')
 
 module.exports = class Qursors
 
@@ -13,11 +13,11 @@ module.exports = class Qursors
     @workspace = atom.workspace
     @pane = @workspace?.getActivePane()
 
-    @textEditor = @workspace?.getActiveTextEditor()
-    @textEditorPath = @textEditor?.getPath()
-
     if !@project or !@workspace or !@pane
       return # Not possible.
+
+    @textEditor = @workspace?.getActiveTextEditor()
+    @textEditorPath = @textEditor?.getPath()
 
     if !@textEditor or !@textEditorPath
       return # Not possible.

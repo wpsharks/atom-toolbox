@@ -5,6 +5,7 @@ module.exports = class Curscrop
   constructor: (textEditor, alsoRememberScrollTop) ->
 
     @textEditor = textEditor # In a workspace.
+    @textEditorElement = atom.views.getView(@textEditor)
     @alsoRememberScrollTop = alsoRememberScrollTop
 
     @scrollTop = 0 # Initialize properties.
@@ -12,14 +13,15 @@ module.exports = class Curscrop
 
   remember: -> # Remember cursors.
 
+    @scrollTop = 0 # Initialize/reset memory.
     @bufferPositions = [] # Initialize.
+
     for _cursor in @textEditor.getCursors()
       bufferPosition = _cursor.getBufferPosition()
       @bufferPositions.push([bufferPosition.row, bufferPosition.column])
 
-    @scrollTop = 0 # Initialize/reset memory.
     if @alsoRememberScrollTop # Remember?
-      @scrollTop = @textEditor.getScrollTop()
+      @scrollTop = @textEditorElement.getScrollTop()
 
   restoreFromMemory: -> # Restore from memory.
 
@@ -31,5 +33,5 @@ module.exports = class Curscrop
 
     if @alsoRememberScrollTop # Restore scroll top?
       setTimeout( => # Restore scrollbar.
-        @textEditor.setScrollTop(@scrollTop)
+        @textEditorElement.setScrollTop(@scrollTop)
       5) # Slight delay.

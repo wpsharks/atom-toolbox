@@ -1,8 +1,5 @@
 'atom-text-editor':
 
-  'ctrl-cmd-c': 'ws-toolbox:ctags'
-  'ctrl-alt-cmd-c': 'ws-toolbox:ctags-ws'
-
   'ctrl-cmd-f': 'ws-toolbox:format'
   'ctrl-alt-cmd-f': 'ws-toolbox:format-ws'
 

@@ -1,20 +1,12 @@
 'use strict'
 
-Ctagger = require('./classes/ctagger')
-Formatter = require('./classes/formatter')
 Qursors = require('./classes/qursors')
+Formatter = require('./classes/formatter')
 {CompositeDisposable} = require('atom')
 
 module.exports = # Static class members.
 
   config:
-
-    ctagsPath:
-      title: 'cTags Path'
-      description: '`$ brew tap websharks/formulas && brew install websharks-ctags`.' +
-                    ' Then enter `ctags` here. Or `/usr/local/bin/ctags`.'
-      type: 'string'
-      default: ''
 
     phpCsFixerPath:
       title: 'PHP CS Fixer Path'
@@ -53,17 +45,10 @@ module.exports = # Static class members.
     @commands = atom.commands
     @subscriptions = new CompositeDisposable
 
-    @subscriptions.add @commands.add 'atom-text-editor', 'ws-toolbox:ctags': => @comCtags()
-    @subscriptions.add @commands.add 'atom-text-editor', 'ws-toolbox:ctags-ws': => @comCtags(true)
-
     @subscriptions.add @commands.add 'atom-text-editor', 'ws-toolbox:format': => @comFormat()
     @subscriptions.add @commands.add 'atom-text-editor', 'ws-toolbox:format-ws': => @comFormat(true)
 
     @subscriptions.add @commands.add 'atom-text-editor', 'ws-toolbox:qursors': => @comQursors()
-
-  comCtags: (wsStyleGuidelines) -> # CTags generator; against current project directory.
-
-    new Ctagger(wsStyleGuidelines)
 
   comFormat: (wsStyleGuidelines) -> # Code formatter/beautifier.
 

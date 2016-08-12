@@ -4,8 +4,9 @@
   "description": "Atom toolbox for WebSharks.",
   "repository": "https://github.com/websharks/atom-toolbox",
   "license": "GPL-3.0+",
+
   "engines": {
-    "atom": ">=0.201.0"
+    "atom": ">=1.9.8"
   },
   "dependencies": {
     "atom-space-pen-views": ">=2.0.5",
@@ -17,7 +18,9 @@
     "prettydiff": ">=1.12.19",
     "js-beautify": ">=1.6.3"
   },
+
   "main": "lib/package",
+
   "styles": [
     "style.less"
   ],
