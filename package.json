@@ -1,10 +1,9 @@
 {
-  "version": "15.5.40",
+  "version": "15.5.41",
   "name": "ws-toolbox",
   "description": "Atom toolbox for WebSharks.",
   "repository": "https://github.com/websharks/atom-toolbox",
   "license": "GPL-3.0+",
-
   "engines": {
     "atom": ">=1.9.8"
   },
@@ -18,9 +17,7 @@
     "prettydiff": ">=1.12.19",
     "js-beautify": ">=1.6.3"
   },
-
   "main": "lib/package",
-
   "styles": [
     "style.less"
   ],
