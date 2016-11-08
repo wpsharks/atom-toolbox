@@ -17,8 +17,15 @@ return Symfony\CS\Config\Config::create()
          'multiline_spaces_before_semicolon',
 
          'phpdoc_order',
+         'phpdoc_var_to_type',
+         '-phpdoc_annotation_without_dot',
 
-         //'short_array_syntax',
+         '-no_empty_comment',
+         '-hash_to_slash_comment',
+
+         // 'short_array_syntax',
+         // Disabling this to avoid altering PHP <= 5.3 code.
+         // You can enable this temporarily to auto-fix PHP 5.4+ code.
 
          'strict',
          'strict_param',
