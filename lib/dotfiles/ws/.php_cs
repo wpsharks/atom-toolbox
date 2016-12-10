@@ -1,32 +1,29 @@
-<?php
-return Symfony\CS\Config\Config::create()
-    ->level(Symfony\CS\FixerInterface::SYMFONY_LEVEL)
-    ->fixers([
-        '-return',
-        '-empty_return',
-        '-standardize_not_equal',
-        '-blankline_after_open_tag',
-        '-single_blank_line_before_namespace',
-        '-unused_use',
+<?php // PHP CS Fixer v2+.
+return PhpCsFixer\Config::create()
+    ->setRules([
+        '@Symfony'                           => true,
+        'no_unused_imports'                  => false,
+        'standardize_not_equal'              => false,
+        'blank_line_before_return'           => false,
+        'blank_line_after_opening_tag'       => false,
+        'single_blank_line_before_namespace' => false,
+        'phpdoc_annotation_without_dot'      => false,
+        'hash_to_slash_comment'              => false,
+        'no_empty_comment'                   => false,
 
-         'align_double_arrow',
-         'align_equals',
+        // Other rules.
 
-         'newline_after_open_tag',
-         'no_blank_lines_before_namespace',
-         'multiline_spaces_before_semicolon',
+        'binary_operator_spaces' => [
+            'align_equals'       => true,
+            'align_double_arrow' => true,
+        ],
+        'no_blank_lines_before_namespace'           => true,
+        'no_multiline_whitespace_before_semicolons' => true,
 
-         'phpdoc_order',
-         'phpdoc_var_to_type',
-         '-phpdoc_annotation_without_dot',
+        'phpdoc_order'        => true,
+        'phpdoc_no_alias_tag' => ['var' => 'type'],
 
-         '-no_empty_comment',
-         '-hash_to_slash_comment',
-
-         // 'short_array_syntax',
-         // Disabling this to avoid altering PHP <= 5.3 code.
-         // You can enable this temporarily to auto-fix PHP 5.4+ code.
-
-         'strict',
-         'strict_param',
+        // 'array_syntax' => ['syntax' => 'short'],
+        // Disabling this to avoid altering PHP <= 5.3 code.
+        // You can enable this temporarily to auto-fix PHP 5.4+ code.
      ]);

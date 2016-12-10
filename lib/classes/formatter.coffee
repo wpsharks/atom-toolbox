@@ -140,7 +140,7 @@ module.exports = class Formatter
     if !@wsStyleGuidelines and Fs.existsSync(homeConfigFile)
       configFile = homeConfigFile # Personal config.
 
-    phpCsFixer += " fix --config-file='"+configFile+"'"
+    phpCsFixer += " fix --config='"+configFile+"'"
     phpCsFixer += " '"+@tempEditorPath+"'"
 
     console.log('formatPhp_viaPhpCsFixer: `%s`', phpCsFixer)
