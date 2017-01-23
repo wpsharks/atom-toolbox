@@ -68,14 +68,19 @@ module.exports = class Formatter
     @format( => # Format; based on grammar.
 
       formattedText = @getTempFileContents() # Formatted now.
-      if formattedText # In case of unexptected failure.
+      if formattedText # In case of unexpected failure.
         @textEditor.setText(formattedText)
 
       # Memory restoration and text editor update.
 
-      @textEditor.save() # Save updated file contents.
       @curscrop.restoreFromMemory() # Cursors & scrollTop.
       @textEditor.groupChangesSinceCheckpoint(@checkpoint)
+
+      # Save the updated file contents.
+
+      setTimeout( => # Slight delay for linter.
+        @textEditor.save() # Triggers `onDidSave`.
+      1000) # Slight delay before triggering save events.
 
       # All done. Hide modal status.
 
@@ -103,6 +108,9 @@ module.exports = class Formatter
 
       when 'php' # Primay focus.
         @formatPhp_viaPhpCsFixer(callback)
+
+      when 'typescript'
+        @formatTs_viaTypeScriptFormatter(callback)
 
       when 'html', 'xml'
         @formatHtml_viaJsBeautify(callback)
@@ -145,7 +153,30 @@ module.exports = class Formatter
 
     console.log('formatPhp_viaPhpCsFixer: `%s`', phpCsFixer)
 
-    Command.run(phpCsFixer, callback) # Finall callback.
+    Command.run(phpCsFixer, callback) # Final callback.
+
+  # --------------------------------------------------------------------------------------------------------------------
+
+  formatTs_viaTypeScriptFormatter: (callback) ->
+
+    typeScriptFormatter = atom.config.get('ws-toolbox.TypeScriptFormatterPath')
+    if !typeScriptFormatter # Use default php-cs-fixer in $PATH?
+      typeScriptFormatter = 'tsfmt' # Default binary.
+
+    homeConfigFile = process.env.HOME+'/.tsfmt.json'
+    wsConfigFile = Path.join(__dirname, '../dotfiles/ws/.tsfmt.json')
+
+    configFile = wsConfigFile # Default config. file.
+    if !@wsStyleGuidelines and Fs.existsSync(homeConfigFile)
+      configFile = homeConfigFile # Personal config.
+
+    typeScriptFormatter += " --replace --baseDir='"+Path.dirname(configFile)+"'"
+    typeScriptFormatter += " --no-tsconfig --no-tslint --no-editorconfig"
+    typeScriptFormatter += " '"+@tempEditorPath+"'"
+
+    console.log('formatTs_viaTypeScriptFormatter: `%s`', typeScriptFormatter)
+
+    Command.run(typeScriptFormatter, callback) # Final callback.
 
   # --------------------------------------------------------------------------------------------------------------------
 

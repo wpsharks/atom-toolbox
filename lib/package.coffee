@@ -15,6 +15,13 @@ module.exports = # Static class members.
       type: 'string'
       default: ''
 
+    TypeScriptFormatterPath:
+      title: 'TypeScript Formatter Path'
+      description: '`$ npm install -g typescript-formatter`.' +
+                    ' Then enter `tsfmt` here. Or `/usr/local/bin/tsfmt`.'
+      type: 'string'
+      default: ''
+
     sassConvertPath:
       title: 'Sass-Convert Path'
       description: '`$ brew install ruby && gem install sass`.' +

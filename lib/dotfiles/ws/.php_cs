@@ -1,6 +1,8 @@
 <?php // PHP CS Fixer v2+.
 return PhpCsFixer\Config::create()
     ->setRules([
+        // Symfony rules.
+
         '@Symfony'                           => true,
         'no_unused_imports'                  => false,
         'standardize_not_equal'              => false,
@@ -11,7 +13,7 @@ return PhpCsFixer\Config::create()
         'hash_to_slash_comment'              => false,
         'no_empty_comment'                   => false,
 
-        // Other rules.
+        // Other/misc rules.
 
         'binary_operator_spaces' => [
             'align_equals'       => true,
@@ -20,8 +22,9 @@ return PhpCsFixer\Config::create()
         'no_blank_lines_before_namespace'           => true,
         'no_multiline_whitespace_before_semicolons' => true,
 
-        'phpdoc_order'        => true,
-        'phpdoc_no_alias_tag' => ['var' => 'type'],
+        'phpdoc_order'                        => true,
+        'phpdoc_add_missing_param_annotation' => true,
+        'phpdoc_no_alias_tag'                 => ['var' => 'type'],
 
         // 'array_syntax' => ['syntax' => 'short'],
         // Disabling this to avoid altering PHP <= 5.3 code.
