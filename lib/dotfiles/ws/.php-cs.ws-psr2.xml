@@ -15,6 +15,7 @@
     <exclude name="PSR2.ControlStructures.SwitchDeclaration.SpaceBeforeColonCASE" />
     <exclude name="PSR2.ControlStructures.SwitchDeclaration.SpaceBeforeColonDEFAULT" />
 
+    <exclude name="Squiz.WhiteSpace.ScopeClosingBrace.ContentBefore" />
     <exclude name="Squiz.ControlStructures.ControlSignature.NewlineAfterOpenBrace" />
   </rule>
 
